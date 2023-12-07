@@ -31,7 +31,7 @@ app.layout = html.Div([
         dcc.Graph(id='indicator'),
         
         
-        dcc.Interval(id='interval', interval=1000),
+        dcc.Interval(id='interval', interval=2000),
     ])
 
 @app.callback(
@@ -51,9 +51,11 @@ def update_graph(n_intervals):
     
     data = requests.get(url, params=params).json()["data"]["ohlc"]
     data = pd.DataFrame(data)
-    
-    data.timestamp = pd.to_datetime(data.timestamp)
-    
+    data['timestamp'] = data['timestamp'].astype(int)
+    data['timestamp'] = pd.to_datetime(data['timestamp'], unit='s', errors='ignore')
+
+    data["timestamp"] = data["timestamp"].dt.strftime("%Y-%m-%d %H:%M:%S")
+
     data["rsi"] = ta.rsi(data.close.astype(float))
     
     data = data.iloc[14:]
@@ -79,7 +81,11 @@ def update_graph(n_intervals):
         height=300,
         
     )
+    indicator.update_layout(xaxis_rangeslider_visible=False, height = 400, width = 1000)
     
+
+    
+
     return candles, indicator
 
 
