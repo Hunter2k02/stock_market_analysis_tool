@@ -1,0 +1,40 @@
+.main{
+    height: 100%;
+    width: 100%;
+    
+}
+.menu-div{
+    width: 15%;
+    height: 100%;
+    float :right;
+    
+    
+}
+.charts{
+    width: 80%;
+    height: 100%;
+    display: inline-block;
+
+    
+}
+
+.candles{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
+.indicator{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
+.indicator2{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
+.volume{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
