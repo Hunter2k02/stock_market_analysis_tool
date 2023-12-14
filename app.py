@@ -200,7 +200,11 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         
         
     )
-    indicator.update_layout(xaxis_rangeslider_visible=False, plot_bgcolor="white", paper_bgcolor="whitesmoke")
+    indicator.update_layout(
+        xaxis_rangeslider_visible=False, 
+        plot_bgcolor="white", 
+        paper_bgcolor="whitesmoke"
+        )
     indicator.update_xaxes(
     mirror=True,
     ticks='outside',
@@ -217,8 +221,8 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         gridcolor='lightgrey',
         title_text="Date"
     )
+    indicator.update_traces(line_color='red')
    
-    
     indicator2 = px.line(
         x=data.timestamp,
         y=data[indicator2],
@@ -249,7 +253,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         gridcolor='lightgrey',
         title_text="Date"
     )
-    
+    indicator2.update_traces(line_color='darkviolet')
     
     volume = px.bar(
         x=data.timestamp,
