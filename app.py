@@ -211,7 +211,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
     showline=True,
     linecolor='black',
     gridcolor='lightgrey',
-    title_text="Value"
+    title_text="Date"
     )
     indicator.update_yaxes(
         mirror=True,
@@ -219,7 +219,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         showline=True,
         linecolor='black',
         gridcolor='lightgrey',
-        title_text="Date"
+        title_text="Value"
     )
     indicator.update_traces(line_color='red')
    
@@ -242,7 +242,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         showline=True,
         linecolor='black',
         gridcolor='lightgrey',
-        title_text="Value"
+        title_text="Date"
     )
 
     indicator2.update_yaxes(
@@ -251,7 +251,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         showline=True,
         linecolor='black',
         gridcolor='lightgrey',
-        title_text="Date"
+        title_text="Value"
     )
     indicator2.update_traces(line_color='darkviolet')
     
