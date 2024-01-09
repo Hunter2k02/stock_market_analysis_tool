@@ -10,6 +10,8 @@ from datetime import date, timedelta
 from random import randint
 from constants import API_KEY
 
+
+
 # Function to get news from MarketAux API
 
 def get_news():
@@ -34,8 +36,6 @@ def get_news():
 
 json_data, choice = get_news()
 
-
-
 server = Flask(__name__)
 
 with open("pairs.json", "r") as f:
@@ -52,8 +52,7 @@ time_dict = {
     'day': 86400
 }
 
-indicator_list = [k for k in grouped_indicators.keys()]
-indicator_list = [i.upper() for i in indicator_list]
+indicator_list = [k.upper() for k in grouped_indicators.keys()]
 
 app = Dash(
     __name__,
@@ -94,9 +93,6 @@ app.layout = html.Div(id='main', className="main-div", children=[
     ])
 ], style={'display': 'flex', 'font-family':'Roboto, sans-serif'})
                  
-                          
-        
-
 @app.callback(
     Output('candles', 'figure'),
     Output('indicator', 'figure'),
@@ -118,19 +114,15 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         "step": time_dict[frequency],
         "limit": 60,
     }
-    indicator1 = indicator1.lower()
-    indicator2 = indicator2.lower()
+    indicator1, indicator2 = indicator1.lower(), indicator2.lower()
 
-    function1 = getattr(ta, indicator1)
-    function2 = getattr(ta, indicator2)
-    
+    function1, function2 = getattr(ta, indicator1), getattr(ta, indicator2)
     
     data = requests.get(url, params=params).json()["data"]["ohlc"]
     data = pd.DataFrame(data)
     
     data['timestamp'] = data['timestamp'].astype(int)
     data['timestamp'] = pd.to_datetime(data['timestamp'], unit='s', errors='ignore')
-
     data["timestamp"] = data["timestamp"].dt.strftime("%Y-%m-%d %H:%M:%S")
     
     kwargs1 = {}
@@ -140,13 +132,11 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
     for i in grouped_indicators[indicator2]:
         kwargs2[i] = data[i].astype(float)
         
-    
     data[indicator1] = function1(**kwargs1)
     data[indicator2] = function2(**kwargs2)
     
     data = data.dropna()
    
-    
     candles = go.Figure(
         data=[
             go.Candlestick(
@@ -190,21 +180,18 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         title_text="Price"
     )
     
-    
-
     indicator = px.line(
         x=data.timestamp,
         y=data[indicator1],
-        title=f"First indicator: {indicator1.upper()}",
-        
-        
-        
+        title=f"First indicator: {indicator1.upper()}",    
     )
+    
     indicator.update_layout(
         xaxis_rangeslider_visible=False, 
         plot_bgcolor="white", 
         paper_bgcolor="whitesmoke"
         )
+    
     indicator.update_xaxes(
     mirror=True,
     ticks='outside',
@@ -213,6 +200,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
     gridcolor='lightgrey',
     title_text="Date"
     )
+    
     indicator.update_yaxes(
         mirror=True,
         ticks='outside',
@@ -221,6 +209,7 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
         gridcolor='lightgrey',
         title_text="Value"
     )
+    
     indicator.update_traces(line_color='red')
    
     indicator2 = px.line(
@@ -287,13 +276,9 @@ def update_graph(value, indicator1, indicator2, frequency,  n_intervals):
     )
     return candles, indicator, indicator2, volume
 
-
-
 @server.route("/")
-def hello():
+def index():
     return app.index()
-
-
 
 if __name__ == '__main__':
     server.run(debug=True)

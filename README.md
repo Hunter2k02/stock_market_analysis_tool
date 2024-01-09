@@ -45,3 +45,4 @@ The Stock Market Analysis Tool is a Python-based project that provides a user-fr
 
 ### License
 This project is licensed under the MIT License.
+
