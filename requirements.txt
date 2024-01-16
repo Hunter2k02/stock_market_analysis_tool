@@ -35,7 +35,7 @@ executing==1.2.0
 filelock==3.9.1
 Flask==2.3.2
 Flask-SQLAlchemy==3.0.5
-fonttools==4.42.0
+fonttools==4.43.0
 frozenlist==1.4.0
 google-api-core==2.11.1
 google-api-python-client==2.99.0
