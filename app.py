@@ -11,7 +11,6 @@ from random import randint
 from constants import API_KEY
 import os 
 import shutil
-import io
 
 
 def get_news():
