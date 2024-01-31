@@ -5,9 +5,13 @@ An open-source Stock Market Analysis Tool designed to empower investors and trad
 ## Preview 
 
 ### Functions 
-![](https://github.com/Hunter2k02/stock_market_analytic_tool/gifs/Functions.gif)
+
+![GIF](https://github.com/Hunter2k02/stock_market_analytic_tool/blob/main/gifs/Functions.gif)
+
 ### Downloading charts
-![](https://github.com/Hunter2k02/stock_market_analytic_tool/gifs/Download.gif)
+
+![GIF](https://github.com/Hunter2k02/stock_market_analytic_tool/blob/main/gifs/Download.gif)
+
 ## Overview
 
 The Stock Market Analysis Tool is a Python-based project that provides a user-friendly interface for analyzing real-time and historical stock market data. From interactive charts to technical analysis and integration with analyst ratings, this tool aims to assist users in making informed investment decisions.
