@@ -11,7 +11,7 @@ from random import randint
 from constants import API_KEY
 import os 
 import shutil
-from io import BytesIO
+
 
 
 def get_news():
@@ -125,8 +125,11 @@ def downloader(n_clicks):
     volume.write_image("images/figure3.png")
     
     shutil.make_archive("images", "zip", "images")
-    
-    return dcc.send_file("images.zip")
+    try:
+        return dcc.send_file("images.zip")
+    finally:
+        os.remove("images.zip")
+        shutil.rmtree("images")
       
 # Callback to update graphs           
 @app.callback(
